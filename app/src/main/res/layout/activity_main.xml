@@ -7,16 +7,29 @@
     tools:context=".MainActivity">
 
     <ListView
+        android:layout_below="@id/myToolbar"
         android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
         android:divider="?attr/lvBackground"
-        android:dividerHeight="8dp"
+        android:dividerHeight="8dp"></ListView>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:subtitleTextColor="?attr/titleColor"
+        android:theme="?attr/toolbarTheme"
+        app:popupTheme="@style/Theme.AppCompat.Light"
+
         >
-    </ListView>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

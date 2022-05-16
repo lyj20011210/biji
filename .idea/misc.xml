@@ -13,6 +13,22 @@
         <entry key="..\:/Android Studio/biji/app/src/main/res/layout/edit_layout.xml" value="0.12588652482269502" />
         <entry key="..\:/Android Studio/biji/app/src/main/res/layout/edit_layput.xml" value="0.12588652482269502" />
         <entry key="..\:/Android Studio/biji/app/src/main/res/layout/note_layout.xml" value="0.14427083333333332" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.153" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/drawable-v24/ic_menu_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.153" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/drawable/ic_baseline_dehaze_24.xml" value="0.1" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/drawable/ic_delete_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/drawable/ic_delete_forever_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/drawable/ic_launcher_background.xml" value="0.153" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/drawable/ic_settings_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/drawable/note_shape.xml" value="0.2" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/layout/activity_base.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/layout/edit_layout.xml" value="0.1" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/layout/note_layout.xml" value="0.25" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/menu/editmenu.xml" value="0.17314814814814813" />
+        <entry key="..\:/Users/lu/Desktop/biji/app/src/main/res/menu/main_menu.xml" value="0.1712962962962963" />
       </map>
     </option>
   </component>

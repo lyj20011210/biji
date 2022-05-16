@@ -29,17 +29,6 @@ public class NoteDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        /*
-        for(int i=oldVersion;i<newVersion;i++){
-            switch(i){
-                case 1:
-                    break;
-                case 2:
-                    updateMode(db);
-                default:
-                    break;
-            }
-        }
-        */
+
     }
 }

@@ -3,9 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_search"
+        android:icon="?attr/menu_search"
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:title="Search"
+        />
+    <item
         android:id="@+id/menu_clear"
         android:icon="?attr/menu_delete_all"
         android:title="Clear"
         app:showAsAction="always"
         />
+
+
+
 </menu>

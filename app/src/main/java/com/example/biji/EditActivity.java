@@ -1,14 +1,16 @@
 package com.example.biji;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +19,7 @@ public class EditActivity extends BaseActivity {
 
     EditText et;
     // private String content;
-    // //private String time;
+    // private String time;
 
     private Toolbar myToolbar;
     private String old_content = "";
@@ -68,6 +70,36 @@ public class EditActivity extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.delete:
+                new AlertDialog.Builder(EditActivity.this)
+                        .setMessage("删除吗？")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(openMode == 4){
+                                    intent.putExtra("mode", -1);
+                                    setResult(RESULT_OK, intent);
+                                }
+                                else{
+                                    intent.putExtra("mode", 2);
+                                    intent.putExtra("id", id);
+                                    setResult(RESULT_OK, intent);
+                                }
+                                finish();
+                            }
+                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).create().show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_HOME){

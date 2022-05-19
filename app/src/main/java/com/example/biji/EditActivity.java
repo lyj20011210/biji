@@ -14,7 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+//仅作推送尝试使用，可以删去
 public class EditActivity extends BaseActivity {
 
     EditText et;

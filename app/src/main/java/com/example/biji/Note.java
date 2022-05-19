@@ -6,6 +6,7 @@ public class Note {
     private String time;
     private int tag;
 
+
     public Note(){
 
     }

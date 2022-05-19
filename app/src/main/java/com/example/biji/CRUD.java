@@ -57,6 +57,7 @@ public class CRUD {
 
     @SuppressLint("Range")
     public List<Note> getAllNotes(){
+
         Cursor cursor = db.query(NoteDatabase.TABLE_NAME, columns, null, null, null, null, null);
 
         List<Note> notes = new ArrayList<>();

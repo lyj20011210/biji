@@ -1,11 +1,19 @@
 package com.example.biji;
 
+
 import android.content.DialogInterface;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
+
 import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.EditText;
 
@@ -63,6 +71,7 @@ public class EditActivity extends BaseActivity {
             et.setSelection(old_content.length());
 
         }
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,7 +108,14 @@ public class EditActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+
     }
+
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.edit_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
 
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_HOME){

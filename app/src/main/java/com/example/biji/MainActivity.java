@@ -1,3 +1,4 @@
+
 package com.example.biji;
 
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -56,11 +59,19 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     private RelativeLayout main;
     private WindowManager wm;
     private DisplayMetrics metrics;
+    private TextView setting_text;
+    private ImageView setting_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(R.attr.lvBackground, typedValue, true);
+        Log.d(TAG, "onCreate: " + typedValue.data + " " + typedValue.resourceId);
+        Log.d(TAG, "onCreate: " + getTheme().toString());
+
         btn = findViewById(R.id.fab);
         // tv = findViewById(R.id.tv);
         lv = findViewById(R.id.lv);
@@ -72,8 +83,14 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         setSupportActionBar(myToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        initPopUpView();
         myToolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopUpView();
+            }
+        });
 
         lv.setOnItemClickListener(this);
 
@@ -85,8 +102,9 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
                 intent.putExtra("mode", 4);
                 startActivityForResult(intent, 0);
             }
+
         });
-        initPopUpView();
+
     }
 
     public void initPopUpView(){
@@ -99,10 +117,10 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         wm.getDefaultDisplay().getMetrics(metrics);
     }
 
-    public void showPopuUpView(){
+    public void showPopUpView(){
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-        popupWindow = new PopupWindow(coverView, width, height, false);
+        popupCover = new PopupWindow(coverView, width, height, false);
         popupWindow = new PopupWindow(customView, (int)(width * 0.7), height, true);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
@@ -112,6 +130,23 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
             public void run() {
                 popupCover.showAtLocation(main, Gravity.NO_GRAVITY, 0, 0);
                 popupWindow.showAtLocation(main, Gravity.NO_GRAVITY, 0, 0);
+
+                setting_image = customView.findViewById(R.id.setting_settings_image);
+                setting_text = customView.findViewById(R.id.setting_settings_text);
+
+                setting_image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(MainActivity.this, UserSettingsActivity.class));
+                    }
+                });
+
+                setting_text.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(MainActivity.this, UserSettingsActivity.class));
+                    }
+                });
 
                 coverView.setOnTouchListener(new View.OnTouchListener(){
 
@@ -261,5 +296,10 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }

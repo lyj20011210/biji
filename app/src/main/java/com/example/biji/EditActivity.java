@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 
@@ -116,7 +117,13 @@ public class EditActivity extends BaseActivity {
 //        return super.onCreateOptionsMenu(menu);
 //    }
 
-
+    @Override
+    protected void needRefresh() {
+        Log.d(TAG, "needRefresh: Edit");
+        setNightMode();
+        Intent intent = new Intent(this, EditActivity.class);
+        startActivity(intent);
+    }
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_HOME){
             return true;

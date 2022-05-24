@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/biji/app/src/main/res/drawable/ic_delete_forever_black_24dp.xml" value="0.1" />
+        <entry key="..\:/biji/app/src/main/res/drawable/ic_delete_forever_white_24.xml" value="0.1" />
         <entry key="..\:/biji/app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.1" />
         <entry key="..\:/biji/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/biji/app/src/main/res/layout/note_layout.xml" value="0.4" />

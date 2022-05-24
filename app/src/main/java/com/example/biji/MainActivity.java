@@ -116,6 +116,14 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         metrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(metrics);
     }
+    @Override
+    protected void needRefresh() {
+        Log.d(TAG, "needRefresh: Main");
+        setNightMode();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     public void showPopUpView(){
         int width = metrics.widthPixels;

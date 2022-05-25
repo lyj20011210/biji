@@ -66,7 +66,8 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Intent sintent=new Intent(this,lightSencer.class);
+        startService(sintent);
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.lvBackground, typedValue, true);
         Log.d(TAG, "onCreate: " + typedValue.data + " " + typedValue.resourceId);
@@ -309,5 +310,12 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent sintent=new Intent(this,lightSencer.class);
+        stopService(sintent);
     }
 }

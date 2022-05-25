@@ -2,6 +2,7 @@ package com.example.biji;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,9 +17,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     public final String ACTION = "NIGHT_SWITCH";
     protected BroadcastReceiver receiver;
     protected IntentFilter filter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+//        Intent sintent=new Intent(this,lightSencer.class);
         setNightMode();
         filter = new IntentFilter();
         filter.addAction(ACTION);
@@ -30,7 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 needRefresh();
             }
         };
-
+//        startService(sintent);
         registerReceiver(receiver, filter);
     }
 
@@ -50,7 +53,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
 
         super.onDestroy();
+//        Intent sintent=new Intent(this,lightSencer.class);
         unregisterReceiver(receiver);
+//        stopService(sintent);
     }
     protected abstract void needRefresh();
 }

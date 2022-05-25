@@ -53,9 +53,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
 
         super.onDestroy();
-//        Intent sintent=new Intent(this,lightSencer.class);
+        Intent sintent=new Intent(this,lightSencer.class);
         unregisterReceiver(receiver);
-//        stopService(sintent);
+        stopService(sintent);
     }
     protected abstract void needRefresh();
 }

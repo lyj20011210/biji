@@ -47,8 +47,13 @@ public class UserSettingsActivity extends BaseActivity {
                 finish();
             }
         });
-        if(isNightMode()) myToolbar.setNavigationIcon(getDrawable(R.drawable.ic_settings_white_24dp));
-        else myToolbar.setNavigationIcon(getDrawable(R.drawable.ic_settings_black_24dp));
+        if (isNightMode()) {
+            myToolbar.setNavigationIcon(getDrawable(R.drawable.ic_settings_white_24dp));
+        } else {
+            Intent s=new Intent(this,lightSencer.class);
+            stopService(s);
+            myToolbar.setNavigationIcon(getDrawable(R.drawable.ic_settings_black_24dp));
+        }
     }
 
 
@@ -56,7 +61,7 @@ public class UserSettingsActivity extends BaseActivity {
         Log.d(TAG, "needRefresh: UserSettings");
     }
 
-    public void initView(){
+    public void initView() {
         nightMode = findViewById(R.id.nightMode);
         nightMode.setChecked(sharedPreferences.getBoolean("nightMode", false));
         nightMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -69,7 +74,7 @@ public class UserSettingsActivity extends BaseActivity {
         });
     }
 
-    private void setNightModePref(boolean night){
+    private void setNightModePref(boolean night) {
         //通过nightMode switch修改pref中的nightMode
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -77,7 +82,7 @@ public class UserSettingsActivity extends BaseActivity {
         editor.commit();
     }
 
-    private void setSelfNightMode(){
+    private void setSelfNightMode() {
         //重新赋值并重启本activity
 
         super.setNightMode();
@@ -90,7 +95,7 @@ public class UserSettingsActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             Intent intent = new Intent();
             intent.setAction("NIGHT_SWITCH");
             sendBroadcast(intent);

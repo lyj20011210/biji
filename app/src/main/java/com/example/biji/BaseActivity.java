@@ -39,10 +39,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public boolean isNightMode(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
         return sharedPreferences.getBoolean("nightMode", false);
     }
     public void setNightMode(){
         if(isNightMode()) {
+            Intent s=new Intent(this,lightSencer.class);
+            stopService(s);
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             Log.d(TAG, "setNightMode: " + sharedPreferences.getBoolean("nightMode", false));
             this.setTheme(R.style.NightTheme);

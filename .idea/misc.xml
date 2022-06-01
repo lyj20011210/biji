@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Data/biji/app/src/main/res/drawable/ic_message_black_24dp.xml" value="0.2415" />
+        <entry key="..\:/Data/biji/app/src/main/res/layout/activity_base.xml" value="0.12132725430597771" />
+        <entry key="..\:/Data/biji/app/src/main/res/layout/activity_main.xml" value="0.12132725430597771" />
+        <entry key="..\:/Data/biji/app/src/main/res/layout/activity_message.xml" value="0.1" />
+        <entry key="..\:/Data/biji/app/src/main/res/layout/activity_xs.xml" value="0.24947916666666667" />
+        <entry key="..\:/Data/biji/app/src/main/res/layout/edit_layout.xml" value="0.176" />
+        <entry key="..\:/Data/biji/app/src/main/res/layout/msa_layout.xml" value="0.536" />
+        <entry key="..\:/Data/biji/app/src/main/res/layout/note_layout.xml" value="0.24947916666666667" />
+        <entry key="..\:/Data/biji/app/src/main/res/layout/preference_layout.xml" value="0.24947916666666667" />
+        <entry key="..\:/Data/biji/app/src/main/res/layout/setting_cover.xml" value="0.24947916666666667" />
+        <entry key="..\:/Data/biji/app/src/main/res/layout/setting_layout.xml" value="0.24947916666666667" />
+        <entry key="..\:/Data/biji/app/src/main/res/menu/edit_menu.xml" value="0.24564102564102563" />
+        <entry key="..\:/Data/biji/app/src/main/res/menu/main_menu.xml" value="0.24947916666666667" />
         <entry key="..\:/biji/app/src/main/res/drawable/ic_delete_forever_black_24dp.xml" value="0.1" />
         <entry key="..\:/biji/app/src/main/res/drawable/ic_delete_forever_white_24.xml" value="0.1" />
         <entry key="..\:/biji/app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.1" />

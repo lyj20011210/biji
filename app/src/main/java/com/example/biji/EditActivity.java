@@ -1,25 +1,26 @@
 package com.example.biji;
 
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
-
 import android.view.MenuItem;
-
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,8 +28,6 @@ import java.util.Date;
 public class EditActivity extends BaseActivity {
 
     EditText et;
-    // private String content;
-    // private String time;
 
     private Toolbar myToolbar;
     private String old_content = "";
@@ -39,6 +38,7 @@ public class EditActivity extends BaseActivity {
     private int tag = 1;
     public Intent intent = new Intent(); // message to be sent
     private boolean tagChange = false;
+    private String content = "";
 
 
     @Override
@@ -50,7 +50,7 @@ public class EditActivity extends BaseActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //设置toolbar取代actionbar
 
-        myToolbar.setNavigationOnClickListener(new View.OnClickListener(){
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 autoSetMessage();
@@ -81,19 +81,18 @@ public class EditActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.delete:
                 new AlertDialog.Builder(EditActivity.this)
                         .setMessage("删除吗？")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if(openMode == 4){
+                                if (openMode == 4) {
                                     intent.putExtra("mode", -1);
                                     setResult(RESULT_OK, intent);
-                                }
-                                else{
+                                } else {
                                     intent.putExtra("mode", 2);
                                     intent.putExtra("id", id);
                                     setResult(RESULT_OK, intent);
@@ -107,15 +106,49 @@ public class EditActivity extends BaseActivity {
                     }
                 }).create().show();
                 break;
+            case R.id.message:
+                new AlertDialog.Builder(EditActivity.this)
+                        .setMessage("添加短信吗？")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                //获取权限
+                                if (ContextCompat.checkSelfPermission(EditActivity.this,
+                                        Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+                                    ActivityCompat.requestPermissions(EditActivity.this,
+                                            new String[]{Manifest.permission.READ_SMS}, 1);
+                                } else {
+
+                                    Uri uri = Uri.parse("content://sms/");
+                                    ContentResolver cr = getContentResolver();
+                                    String[] projection = new String[]{"_id", "address", "person", "body", "date", "type"};
+                                    Cursor cur = cr.query(uri, projection, null, null, "date desc");
+                                    if (null == cur) {
+                                        Log.i("ooc", "************cur == null");
+                                        return;
+                                    }
+                                    while (cur.moveToNext()) {
+                                        @SuppressLint("Range") String number = cur.getString(cur.getColumnIndex("address"));//手机号
+                                        @SuppressLint("Range") String name = cur.getString(cur.getColumnIndex("person"));//联系人姓名列表
+                                        @SuppressLint("Range") String body = cur.getString(cur.getColumnIndex("body"));//短信内容
+                                        content = content + number + "\n" + body + "\n\n";
+//                                    Log.d("tar", content);
+
+                                    }
+                                    et.setText(content);
+                                }
+                            }
+                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).create().show();
+                break;
         }
         return super.onOptionsItemSelected(item);
-
     }
-
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.edit_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
 
     @Override
     protected void needRefresh() {
@@ -124,11 +157,11 @@ public class EditActivity extends BaseActivity {
         Intent intent = new Intent(this, EditActivity.class);
         startActivity(intent);
     }
-    public boolean onKeyDown(int keyCode, KeyEvent event){
-        if (keyCode == KeyEvent.KEYCODE_HOME){
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_HOME) {
             return true;
-        }
-        else if (keyCode == KeyEvent.KEYCODE_BACK){
+        } else if (keyCode == KeyEvent.KEYCODE_BACK) {
             autoSetMessage();
             //Intent intent = new Intent();
             //intent.putExtra("content", et.getText().toString());
@@ -140,19 +173,17 @@ public class EditActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public void autoSetMessage(){
-        if(openMode == 4){
-            if(et.getText().toString().length() == 0){
+    public void autoSetMessage() {
+        if (openMode == 4) {
+            if (et.getText().toString().length() == 0) {
                 intent.putExtra("mode", -1); //nothing new happens.
-            }
-            else{
+            } else {
                 intent.putExtra("mode", 0); // new one note;
                 intent.putExtra("content", et.getText().toString());
                 intent.putExtra("time", dateToStr());
                 intent.putExtra("tag", tag);
             }
-        }
-        else {
+        } else {
             if (et.getText().toString().equals(old_content) && !tagChange)
                 intent.putExtra("mode", -1); // edit nothing
             else {
@@ -165,7 +196,7 @@ public class EditActivity extends BaseActivity {
         }
     }
 
-    public String dateToStr(){
+    public String dateToStr() {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return simpleDateFormat.format(date);
